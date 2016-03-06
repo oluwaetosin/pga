@@ -1,0 +1,6 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+RewriteBase /pganigeria
+
+

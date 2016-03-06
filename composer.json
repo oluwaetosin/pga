@@ -1,0 +1,11 @@
+{
+    "name": "pganigeria/pganigeria",
+    "authors": [
+        {
+            "name": "oluwaetosin",
+            "email": "oluwaetosin@gmail.com"
+        }
+    ],
+    "require": {"vrana/notorm": "dev-master",
+        "slim/slim": "^3.1"}
+}

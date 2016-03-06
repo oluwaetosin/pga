@@ -1,0 +1,154 @@
+ 
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            {{pageTitle}}
+            <small>{{pageDescription}}</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"></a></li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Finacial Record</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                     <div class="alert alert-success" ng-if="showSuccess"><p>{{successMessage}}</p></div>
+                      <div class="alert alert-danger" ng-if="showError"><p>{{errorMessage}}</p></div>
+                      <div class="panel panel-warning" ng-if="transactions.length == 0">
+                          <div class="panel panel-heading">Notification</div>
+                          <div class="panel panel-body">No Existing Financial Record  for this Member</div>
+                      </div>
+                      <div class="row" ng-if="transactions.length != 0">
+                          <div class="col-md-3">
+
+              <!-- Profile Image -->
+              <div class="box box-primary">
+                <div class="box-body box-profile">
+                  <img class="profile-user-img img-responsive" ng-src="images/{{member.passport}}" alt="User profile picture">
+                  <h3 class="profile-username text-center">{{member.first_name}} {{member.last_name}}</h3>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div>
+                          <div class="col-md-9">
+                          <table id="example2"  class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="transaction in transactions track by $index">
+                        <td>#{{transaction.amount}}</td>
+                        <td>
+                            <span ng-if="transaction.type == 'l'">Loan</span>
+                            <span ng-if="transaction.type == 's'">Subscription</span>
+                            <span ng-if="transaction.type == 'm'">Membership Dues</span>
+                            <span ng-if="transaction.type == 'r'">Loan Repayment</span>
+                        </td>
+                        <td>{{transaction.transaction_date}}</td>
+             
+                      </tr>
+                      
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                      </div>
+                      </div>
+                  
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+             
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+<!--      <div class="modal" id="memberModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Member Profile</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form class="form-horizontal">
+                  <div class="box-body">
+                      <div class="alert alert-success" ng-if="showSuccess"><p>{{successMessage}}</p></div>
+                      <div class="alert alert-danger" ng-if="showError"><p>{{errorMessage}}</p></div>
+                      <div class="form-group">
+                         <label for="passport" class="col-sm-2 control-label">Picture</label>
+                         <div class="col-sm-10">
+                             <img ng-hide='setProfile' ng-src="images/{{activeMember.passport}}" class="img-responsive image img-rounded" ngf-src="'images/{{passport}}' || passport || 'images/{{activeMember.passport}}'"><br> 
+                             <img ng-if='setProfile' ng-src="images/{{activeMember.passport}}" class="img-responsive image img-rounded" ngf-src="passport || 'images/{{activeMember.passport}}'"><br>  
+                             <div class="btn btn-info" ngf-select ng-click="setProfile = 'true'" ng-model="passport" 
+                         name="passport" ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+                        ngf-resize="{width: 150, height: 150}">Select Picture</div>
+                         </div>
+                        
+                      </div>
+                        
+                    <div class="form-group">
+                      <label for="first_name" class="col-sm-2 control-label">First Name</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" name="first_name" ng-model="activeMember.first_name"
+                               required minlength="5" maxlength="30" id="first_name" placeholder="First Name">
+                      </div>
+                    </div>
+                      
+                      <div class="form-group">
+                      <label for="last_name" class="col-sm-2 control-label">Last Name</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" name="last_name" ng-model="activeMember.last_name"
+                               required minlength="5" maxlength="30" id="first_name" placeholder="Last Name">
+                      </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
+                        <div class="col-sm-10 text-center">
+                        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                            <input type="text" ng-model="activeMember.dob" class="form-control">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                     </div>
+                     </div>
+                      <div class="form-group">
+                          <label for="sex" class="col-sm-2 control-label">Sex</label>
+                          <div class="col-sm-10">
+                              <div class="btn-group">
+                                  <label class="btn btn-default" ng-model="activeMember.sex" 
+                                          uib-btn-radio="'m'">Male</label>
+                                <label class="btn btn-default" ng-model="activeMember.sex" 
+                                       uib-btn-radio="'f'">Female</label>
+                              </div>
+                          </div>
+                      </div>
+                     
+                  </div> /.box-body 
+                 
+                </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateMember(activeMember,passport)">Save changes</button>
+                  </div>
+                </div> /.modal-content 
+              </div> /.modal-dialog 
+            </div>-->
