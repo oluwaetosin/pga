@@ -10,10 +10,13 @@ app.controller('membersCtrl', function ($scope, members, Upload, apiManager,$tim
         $("#memberModal").modal('show');
     };
     $scope.printDiv = function(divName) {
+     $('form input[type=text]').each(function() {
+  $(this).attr('value', $(this).val());
+});
     var printContents = document.getElementById(divName).innerHTML;
-  var popupWin = window.open('', '_blank', 'width=300,height=300');
+  var popupWin = window.open('', '_blank', 'width=600,height=600');
   popupWin.document.open();
-  popupWin.document.write('<html><head><link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></head><body onload="window.print()">' + printContents + '</body></html>');
+  popupWin.document.write('<html><head><link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"><link rel="stylesheet" href="dist/css/AdminLTE.min.css"></head><body onload="window.print()">' + printContents + '</body></html>');
   popupWin.document.close();
 }
    $scope.delete = function (activeMember){

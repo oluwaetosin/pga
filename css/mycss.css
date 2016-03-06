@@ -1,0 +1,9 @@
+@media print {
+    .main-header,footer,aside,.print-btn{
+        display: none;
+    }
+    .content-wrapper{
+        width: 100%; margin: 0; float: none;
+    }
+}
+
